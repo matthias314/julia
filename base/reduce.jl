@@ -53,11 +53,11 @@ end
 function _foldl_impl(op::OP, init, itr) where {OP}
     # Unroll the while loop once; if init is known, the call to op may
     # be evaluated at compile time
-    y = iterate(itr)
+    @inbounds y = iterate(itr)
     y === nothing && return init
     v = op(init, y[1])
     while true
-        y = iterate(itr, y[2])
+        @inbounds y = iterate(itr, y[2])
         y === nothing && break
         v = op(v, y[1])
     end

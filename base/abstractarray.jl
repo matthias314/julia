@@ -1217,7 +1217,7 @@ zero(x::AbstractArray{T}) where {T} = fill!(similar(x, typeof(zero(T))), zero(T)
 # While the definitions for IndexLinear are all simple enough to inline on their
 # own, IndexCartesian's CartesianIndices is more complicated and requires explicit
 # inlining.
-function iterate(A::AbstractArray, state=(eachindex(A),))
+@propagate_inbounds function iterate(A::AbstractArray, state=(eachindex(A),))
     y = iterate(state...)
     y === nothing && return nothing
     A[y[1]], (state[1], tail(y)...)
