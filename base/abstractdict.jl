@@ -565,6 +565,7 @@ function get!(default::Callable, t::AbstractDict{K,V}, key) where K where V
     end
 end
 
+push!(t::AbstractDict) = t
 push!(t::AbstractDict, p::Pair) = setindex!(t, p.second, p.first)
 
 # AbstractDicts are convertible

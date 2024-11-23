@@ -1564,3 +1564,8 @@ end
         @test                    valtype(D{K,    V}) == V
     end
 end
+
+@testset "push! with no pairs" begin
+    d = Dict('a' => 1, 'b' => 2)
+    @test push!(d) === d
+end
